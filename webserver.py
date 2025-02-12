@@ -4,13 +4,15 @@ import hardware
 # 📄 Página HTML enviada pelo servidor
 def html_page():
     return """<!DOCTYPE html>
-    <html><head><meta charset="UTF-8"><title>BitDogLab</title></head>
+    <html><head><meta charset="UTF-8"><title>BitDogLab - Check-in</title></head>
     <body>
-        <h2>Página de Controle</h2>
+        <h2>Registro de Presença</h2>
+        <p>Selecione seu nome para fazer check-in/check-out:</p>
         <form action="/" method="GET">
-            <button name="msg" value="VERMELHO">Vermelho</button>
-            <button name="msg" value="VERDE">Verde</button>
-            <button name="msg" value="AZUL">Azul</button>
+            <button name="user" value="Joao">João</button>
+            <button name="user" value="Maria">Maria</button>
+            <button name="user" value="Carlos">Carlos</button>
+            <button name="user" value="Visitante">Visitante</button>
         </form>
     </body>
     </html>"""
@@ -39,27 +41,21 @@ def check_for_connections():
         print(f"📜 Requisição recebida:\n{request}")
 
         # Processa os comandos dos botões enviados na URL
-        if "msg=" in request:
-            msg = request.split("msg=")[1].split(" ")[0]
-            msg = msg.upper().strip()
-            handle_message(msg)
+        if "user=" in request:
+            user = request.split("user=")[1].split(" ")[0].split("&")[0]
+            user = user.upper().strip()
+            handle_checkin(user)
 
         # Envia a resposta HTTP com a página
         response = html_page()
         conn.send("HTTP/1.1 200 OK\nContent-Type: text/html\n\n".encode())
         conn.send(response.encode())
         conn.close()
-
     except OSError as e:
         print(f"⚠️ Erro na conexão: {e}")
 
-# 🎨 Função para mudar a cor do LED RGB conforme o comando recebido
-def handle_message(msg):
-    if msg == "VERMELHO":
-        hardware.set_rgb_color(65535, 0, 0)   # Vermelho
-    elif msg == "VERDE":
-        hardware.set_rgb_color(0, 65535, 0)   # Verde
-    elif msg == "AZUL":
-        hardware.set_rgb_color(0, 0, 65535)   # Azul
-    else:
-        print(f"⚠️ Comando desconhecido: {msg}")
+# 🖍 Função para processar check-in/check-out do usuário
+def handle_checkin(user):
+    print(f"📍 {user} fez check-in/check-out!")
+    hardware.set_rgb_color(0, 65535, 0)  # Verde como confirmação
+
