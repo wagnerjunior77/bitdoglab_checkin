@@ -1,7 +1,7 @@
 # config.py
 
 # =========================================================
-# PINOS DA BITDOGLAB (Exemplo adaptado do seu mapeamento)
+# PINOS DA BITDOGLAB 
 # =========================================================
 
 # LEDs
@@ -19,21 +19,19 @@ BTN_B_PIN = 6
 JOYSTICK_BTN_PIN = 22
 
 # Joystick analógico (ADC)
-# Observação: em MicroPython, precisamos chamar ADC(Pin(x)) 
-# no pino físico GP26..28, mas não existe "adc_select_input()" 
-# como no C. Vamos mapear o pino físico aqui:
+# como no C. mapear o pino físico aqui:
 JOYSTICK_X_PIN = 26  # canal ADC0
 JOYSTICK_Y_PIN = 27  # canal ADC1
 MIC_PIN         = 28  # canal ADC2 (exemplo)
 
-# I2C (se quisermos usar)
+# I2C 
 I2C_SDA_PIN = 14
 I2C_SCL_PIN = 15
 
 I2C_FREQ = 400000  # 400kHz
 
 # Se for usar Wi-Fi AP (Access Point):
-AP_SSID     = 'MicroPython-AP'
-AP_PASSWORD = '123456789'
+AP_SSID     = 'Sua rede'
+AP_PASSWORD = 'Sua senha'
 
 
