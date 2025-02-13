@@ -3,8 +3,8 @@ import config
 import time
 
 def start_access_point():
-    ssid = 'BitDogLab'
-    password = '123456789'
+    ssid = 'Nome rede'
+    password = 'Senha'
 
     ap = network.WLAN(network.AP_IF)
     ap.config(essid=ssid, password=password)
